@@ -1,0 +1,214 @@
+/* Page Setup + Mixins */
+
+$breakXLNoUnit: 1440;
+$breakXL: 1440px;
+$breakL: 1024px;
+$breakM: 950px;
+$breakS: 768px;
+$breakSNoUnit: 768;
+
+:root {
+  --gutter: 20px;
+  --pageMarginTotal: 100px;
+  --pageMargin: calc(var(--pageMarginTotal) - (var(--gutter) / 2));
+  --easingOut: cubic-bezier(0.16, 1, 0.3, 1);
+  --easing: cubic-bezier(0.76, 0, 0.24, 1);
+  --text-color: black;
+  --bg-color: #fff;
+  --inverse-color: white;
+
+  @media all and (max-width: $breakS) {
+    --pageMarginTotal: 20px;
+  }
+}
+
+[data-theme="dark"] {
+  --text-color: #e1e1ff;
+  --bg-color: #161625;
+  --inverse-color: black;
+}
+
+@mixin fluidProp($prop, $min, $max) {
+  #{$prop}: #{$min + "px"};
+  $diff: ($max - $min);
+  $screenDiff: ($breakXLNoUnit - $breakSNoUnit);
+  @media screen and (min-width: $breakS) {
+    #{$prop}: calc(
+      #{$min + "px"} + #{$diff} * ((100vw - #{$breakS}) / #{$screenDiff})
+    );
+  }
+  @media screen and (min-width: $breakXL) {
+    #{$prop}: #{$max + "px"};
+  }
+}
+
+@import "reset";
+@import "grid";
+@import "typography";
+
+/* Colours */
+
+/* Grid Overlay */
+
+.grid-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 200;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  &.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .column-overlay {
+    background: red;
+    opacity: 0.1;
+    height: 100vh;
+  }
+}
+
+/* General Styles */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: "Montserrat";
+}
+h1,
+h2,
+h3,
+li {
+  &.syc {
+    font-family: "Syncopate";
+  }
+}
+
+.nav-bar .columns {
+  align-items: center;
+}
+.nav-bar {
+  padding: 20px 0px;
+  overflow: hidden;
+  background-color: var(--bg-color);
+  top: 0;
+  left: 0;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+}
+
+.nav-items-left,
+.nav-items-right,
+.nav-items-center {
+  display: flex;
+  align-items: center;
+}
+
+.nav-center-text {
+  align-self: center;
+  display: inline-flex;
+
+  font-size: 24px;
+  font-weight: bold;
+}
+.nav-links {
+  display: inline-flex;
+  list-style: none;
+  align-self: center;
+  column-gap: 100px;
+  // flex-wrap: wrap;
+  &.right {
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+.nav-links a {
+  text-decoration: none;
+  color: inherit;
+  font-size: 18px;
+}
+.theme-switch input:checked + .icon-container {
+  .icon-light-mode-black {
+    background-color: #fff;
+    color: black;
+  }
+}
+.theme-switch input {
+  display: none;
+}
+.theme-switch {
+  cursor: pointer;
+}
+.icon-container {
+  border: 2px solid var(--text-color);
+  border-radius: 28px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.icon-light-mode-black {
+  background-color: black;
+  color: #fff;
+
+  border-radius: 50%;
+  padding: 7px;
+  font-size: 38px;
+}
+.icon-dark-mode-black {
+  color: var(--text-color);
+  padding: 7px;
+  font-size: 38px;
+}
+.icon-cog {
+  font-size: 24px;
+  cursor: pointer;
+}
+main {
+  margin-top: 200px;
+}
+.marquee {
+  --gap: 1rem;
+  display: flex;
+  // overflow: hidden;
+  user-select: none;
+  gap: var(--gap);
+}
+.marquee-content {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-around;
+  min-width: 100%;
+  gap: var(--gap);
+  animation: scroll 15s linear infinite;
+  li {
+    font-size: 72px;
+    font-weight: bold;
+    margin-right: 45px;
+
+    &.off {
+      color: var(--inverse-color);
+      text-shadow: 1px 0 0 var(--text-color), 0 -1px 0 var(--text-color),
+        0 1px 0 var(--text-color), -1px 0 0 var(--text-color);
+    }
+  }
+}
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+.container-supreme {
+  margin-top: 100px;
+  background-image: url("../images/erik-eastman--6zFVL4YuaM-unsplash\ 1.jpg");
+  width: 100%;
+  height: 425px;
+}
