@@ -206,9 +206,16 @@ main {
     transform: translateX(calc(-100% - var(--gap)));
   }
 }
-.container-supreme {
+.banner-image {
   margin-top: 100px;
-  background-image: url("../images/erik-eastman--6zFVL4YuaM-unsplash\ 1.jpg");
-  width: 100%;
-  height: 425px;
+}
+.media-container {
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    &.main {
+      aspect-ratio: 4.05;
+    }
+  }
 }
