@@ -32,6 +32,7 @@ $(document).ready(function () {
     pageDots: false,
     wrapAround: true,
     cellAlign: "center",
+    prevNextButtons: false,
   });
   // variable for highest height
   //   let maxHeight = 0;

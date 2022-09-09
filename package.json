@@ -1,13 +1,13 @@
 {
-  "name": "base-static-project",
+  "name": "architectural-statics",
   "version": "1.0.0",
-  "description": "Base Project",
+  "description": "architectural",
   "source": "src/index.html",
   "scripts": {
     "start": "parcel",
-    "build:parcel": "parcel build --public-url ./",
+    "build:parcel": "parcel build --public-url https://work.rudijephcott.com/architectural/",
     "clean": "rm -rf dist/*",
-    "build": "npm run clean && npm run build:parcel"
+    "build": "npm run build:parcel"
   },
   "author": "",
   "license": "ISC",
